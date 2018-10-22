@@ -1,26 +1,29 @@
-{{#if_eq build "standalone"}}
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-{{/if_eq}}
-import Vue from 'vue'{{#if_eq lintConfig "airbnb"}};{{/if_eq}}
-import App from './App'{{#if_eq lintConfig "airbnb"}};{{/if_eq}}
-{{#router}}
-import router from './router'{{#if_eq lintConfig "airbnb"}};{{/if_eq}}
-{{/router}}
 
-Vue.config.productionTip = false{{#if_eq lintConfig "airbnb"}};{{/if_eq}}
+import Vue from 'vue'
+import App from './App.vue'
+import router from './router/index.js'
+import store from './vuex/store.js'
 
-/* eslint-disable no-new */
+// router.beforeEach((to, from, next) => {
+//   if (store.state.isLogin) {
+//     // 登录状态下进入登录页，重定向到首页
+//     if (to.meta && to.meta.requireAuth === false) {
+//       document.title = '1Token官网'
+//       next({ path: '/' })
+//     }
+//   } else {
+//     if (to.meta && to.meta.requireAuth === true) {
+//       document.title = '登录1Token'
+//       next({ path: `/login?redirect=${to.path}` })
+//     }
+//   }
+//   document.title = to.meta ? to.meta.title : '1Token'
+//   next()
+// })
+
 new Vue({
   el: '#app',
-  {{#router}}
   router,
-  {{/router}}
-  {{#if_eq build "runtime"}}
-  render: h => h(App){{#if_eq lintConfig "airbnb"}},{{/if_eq}}
-  {{/if_eq}}
-  {{#if_eq build "standalone"}}
-  template: '<App/>',
-  components: { App }{{#if_eq lintConfig "airbnb"}},{{/if_eq}}
-  {{/if_eq}}
-}){{#if_eq lintConfig "airbnb"}};{{/if_eq}}
+  store,
+  render: h => h(App)
+})

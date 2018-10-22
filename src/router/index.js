@@ -1,15 +1,23 @@
-import Vue from 'vue'{{#if_eq lintConfig "airbnb"}};{{/if_eq}}
-import Router from 'vue-router'{{#if_eq lintConfig "airbnb"}};{{/if_eq}}
-import Hello from '@/components/Hello'{{#if_eq lintConfig "airbnb"}};{{/if_eq}}
+import Vue from 'vue'
+import Router from 'vue-router'
+// import Home from '@/views/Home'
 
-Vue.use(Router){{#if_eq lintConfig "airbnb"}};{{/if_eq}}
+const Home = () => import(/* webpackChunkName: "views-home" */ '@/views/Home')
+
+Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
-      name: 'Hello',
-      component: Hello{{#if_eq lintConfig "airbnb"}},{{/if_eq}}
-    }{{#if_eq lintConfig "airbnb"}},{{/if_eq}}
-  ]{{#if_eq lintConfig "airbnb"}},{{/if_eq}}
-}){{#if_eq lintConfig "airbnb"}};{{/if_eq}}
+      name: 'Home',
+      component: Home,
+      meta: {
+        title: '1Token|数字货币行业的专业级券商+期货公司'
+      }
+    }
+  ]
+})
+
+
